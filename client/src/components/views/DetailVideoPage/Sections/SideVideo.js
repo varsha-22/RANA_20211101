@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import axios from 'axios';
+import { VIDEO_SERVER, TARGET_URL } from '../../../Config';
 function SideVideo() {
 
     const [SideVideos, setSideVideos] = useState([])
 
     useEffect(() => {
-        axios.get('/api/video/getVideos')
+        axios.get(`${VIDEO_SERVER}/getVideos`)
             .then(response => {
                 if (response.data.success) {
                     console.log(response.data.videos)
@@ -26,7 +27,7 @@ function SideVideo() {
        return <div style={{ display: 'flex', marginTop: '1rem', padding: '0 2rem' }}>
         <div style={{ width:'40%', marginRight:'1rem' }}>
             <a href={`/video/${video._id}`}  style={{ color:'gray' }}>
-                <img style={{ width: '100%' }} src={`http://localhost:5000/${video.thumbnail}`} alt="thumbnail" />
+                <img style={{ width: '100%' }} src={`${TARGET_URL}/${video.thumbnail}`} alt="thumbnail" />
             </a>
         </div>
 

@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Avatar, Col, Typography, Row } from 'antd';
 import axios from 'axios';
+import { VIDEO_SERVER, CATEGORY_SERVER, TARGET_URL } from '../../Config';
+
 const { Title } = Typography;
 const { Meta } = Card;
 function LandingPage() {
 
     const [Videos, setVideos] = useState([])
+    const [Categories, setCategories] = useState([])
+
 
     useEffect(() => {
-        axios.get('/api/video/getVideos')
+        axios.get(`${VIDEO_SERVER}/getVideos`)
             .then(response => {
                 if (response.data.success) {
                     console.log(response.data.videos)
@@ -19,7 +23,35 @@ function LandingPage() {
             })
     }, [])
 
+    useEffect(() => {
+        axios.get(`${CATEGORY_SERVER}/getAllCategories`)
+            .then(response => {
+                if (response.data.success) {
+                    console.log("--categories--", response.data.categories)
+                    this.Categories = response.data.categories
+                    setCategories(response.data.categories)
+                } else {
+                    addCategories()
+                }
+            })
+    }, [])
 
+    const addCategories = () => {
+        const categories = [
+            { value: 'excercise', label: "Exercise" },
+            { value: 'education', label: "Education" },
+            { value: 'recipe', label: "Recipe" }
+        ]
+
+        axios.post(`${CATEGORY_SERVER}/addCategories`, categories)
+            .then(response => {
+                if (response.data.success) {
+                    console.log('categories added Successfully')
+                } else {
+                    alert('Failed to add categories')
+                }
+            })
+    }
 
 
 
@@ -32,7 +64,7 @@ function LandingPage() {
             <div style={{ position: 'relative' }}>
                 <a href={`/video/${video._id}`} >
                 <div class="img__wrap">
-                    <img style={{ width: '100%' }} alt="thumbnail" src={`http://localhost:5000/${video.thumbnail}`} />
+                    <img style={{ width: '100%' }} alt="thumbnail" src={`${TARGET_URL}/${video.thumbnail}`} />
                     <p class="img__description"> {video.title} </p>
                 </div>
                 <div className=" duration"

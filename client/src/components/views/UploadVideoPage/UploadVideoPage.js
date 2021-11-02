@@ -3,9 +3,9 @@ import { Typography, Button, Form, Input, Icon } from 'antd';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
 import { useSelector } from "react-redux";
+import { VIDEO_SERVER, TARGET_URL } from '../../Config';
 
 const { Title } = Typography;
-const { TextArea } = Input;
 
 const Catogory = [
     { value: 0, label: "Exercise" },
@@ -53,7 +53,7 @@ function UploadVideoPage(props) {
             thumbnail: Thumbnail
         }
 
-        axios.post('/api/video/uploadVideo', variables)
+        axios.post(`${VIDEO_SERVER}/uploadVideo`, variables)
             .then(response => {
                 if (response.data.success) {
                     alert('video Uploaded Successfully')
@@ -74,7 +74,7 @@ function UploadVideoPage(props) {
         console.log(files)
         formData.append("file", files[0])
 
-        axios.post('/api/video/uploadfiles', formData, config)
+        axios.post(`${VIDEO_SERVER}/uploadfiles`, formData, config)
             .then(response => {
                 if (response.data.success) {
 
@@ -86,7 +86,7 @@ function UploadVideoPage(props) {
 
                     //gerenate thumbnail with this filepath ! 
 
-                    axios.post('/api/video/thumbnail', variable)
+                    axios.post(`${VIDEO_SERVER}/thumbnail`, variable)
                         .then(response => {
                             if (response.data.success) {
                                 setDuration(response.data.fileDuration)
@@ -135,7 +135,7 @@ function UploadVideoPage(props) {
 
                     {Thumbnail !== "" &&
                         <div>
-                            <img src={`http://localhost:5000/${Thumbnail}`} alt="haha" />
+                            <img src={`${TARGET_URL}/${Thumbnail}`} alt="thumbnail" />
                         </div>
                     }
                 </div>
