@@ -35,7 +35,7 @@ function UploadVideoPage(props) {
         event.preventDefault();
 
         if (user.userData && !user.userData.isAuth) {
-            return alert('Please Log in First')
+            return alert('Please Sign in First')
         }
 
         if (title === "" ||
@@ -71,7 +71,6 @@ function UploadVideoPage(props) {
         const config = {
             header: { 'content-type': 'multipart/form-data' }
         }
-        console.log(files)
         formData.append("file", files[0])
 
         axios.post(`${VIDEO_SERVER}/uploadfiles`, formData, config)

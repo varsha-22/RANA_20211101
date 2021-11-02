@@ -9,7 +9,6 @@ function SideVideo() {
         axios.get(`${VIDEO_SERVER}/getVideos`)
             .then(response => {
                 if (response.data.success) {
-                    console.log(response.data.videos)
                     setSideVideos(response.data.videos)
                 } else {
                     alert('Failed to get Videos')

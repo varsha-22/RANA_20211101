@@ -1,7 +1,7 @@
-import express from 'express';
-import { Categories } from '../models/Categories';
-
+const express = require('express');
 const router = express.Router();
+
+const { Categories } = require("../models/User");
 
 //=================================
 //             Categories
@@ -29,4 +29,4 @@ router.get("/getAllCategories", (req, res) => {
 
 });
 
-export default router;
+module.exports = router;

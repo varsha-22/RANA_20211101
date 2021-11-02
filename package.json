@@ -3,23 +3,18 @@
   "version": "1.0.0",
   "description": "video upload",
   "main": "server.js",
-  "type": "module",
   "engine": {
     "node": "10.16.0",
     "npm": "6.9.0"
   },
   "scripts": {
-    "start": "nodemon --exec babel-node server/server.js",
+    "start": "node server/server.js",
     "backend": "nodemon server/server.js",
     "frontend": "npm run front --prefix client",
     "transpile": "babel server --out-dir dist-server",
     "clean": "rimraf dist-server",
     "build": "npm-run-all clean transpile",
-    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\"",
-    "test": "jest"
-  },
-  "jest": {
-    "testEnvironment": "node"
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
   },
   "nodemonConfig": {
     "exec": "npm run dev",
@@ -57,7 +52,6 @@
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "concurrently": "^4.1.0",
-    "jest": "^27.3.1",
     "nodemon": "^1.19.4"
   },
   "babel": {

@@ -10,15 +10,12 @@ function DetailVideoPage(props) {
     const videoId = props.match.params.videoId
     const [Video, setVideo] = useState([])
 
-    const videoVariable = {
-        videoId: videoId
-    }
+    const videoIdObject = { videoId}
 
     useEffect(() => {
-        axios.post(`${VIDEO_SERVER}/getVideo`, videoVariable)
+        axios.post(`${VIDEO_SERVER}/getVideo`, videoIdObject)
             .then(response => {
                 if (response.data.success) {
-                    console.log(response.data.video)
                     setVideo(response.data.video)
                 } else {
                     alert('Failed to get video Info')

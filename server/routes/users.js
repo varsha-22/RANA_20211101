@@ -1,8 +1,9 @@
-import express from 'express';
-import { User } from '../models/User';
-import { authentication } from '../middleware/authentication';
-
+const express = require('express');
 const router = express.Router();
+
+const { User } = require("../models/User");
+
+const { authentication } = require("../middleware/authentication");
 
 //=================================
 //             User
@@ -43,7 +44,7 @@ router.post("/login", (req, res) => {
 
         user.comparePassword(req.body.password, (err, isMatch) => {
             if (!isMatch)
-                return res.json({ loginSuccess: false, message: "Wrong password" });
+                return res.json({ loginSuccess: false, message: "Incorrect password" });
 
             user.generateToken((err, user) => {
                 if (err) return res.status(400).send(err);
@@ -68,4 +69,4 @@ router.get("/logout", authentication, (req, res) => {
     });
 });
 
-export default router;
+module.exports = router;

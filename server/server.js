@@ -1,23 +1,11 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
-import dotenv from 'dotenv';
-import mongoose from 'mongoose';
-import users from './routes/users';
-// import usersRouter from './routes/users.js';
-// import videosRouter from './routes/video';
-// import categoriesRouter from './routes/categories';
-
-// Define "require"
-// import { createRequire } from "module";
-// const require = createRequire(import.meta.url);
-
-// const Users = require("./routes/users");
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const mongoose = require("mongoose");
 
 // Environment Variables
-dotenv.config();
-console.log("==usersRouter==", users);
-const app = express();
+require('dotenv').config();
 
 console.log('process.env.MONGO_URI',process.env.MONGO_URI)
 mongoose

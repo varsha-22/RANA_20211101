@@ -1,9 +1,12 @@
-import express from 'express';
-import multer from 'multer';
-import ffmpeg from 'fluent-ffmpeg';
-import { Video } from '../models/Video';
-
+const express = require('express');
 const router = express.Router();
+
+const multer = require('multer');
+var ffmpeg = require('fluent-ffmpeg');
+
+const { Video } = require("../models/Video");
+// var ffprobe = require('ffprobe-static');
+// ffmpeg.setFfprobePath(ffprobe.path);
 
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -53,15 +56,11 @@ router.post("/thumbnail", (req, res) => {
     let fileDuration ="";
 
     ffmpeg.ffprobe(req.body.filePath, function(err, metadata){
-        // console.dir(metadata);
-        // console.log(metadata.format.duration);
-
         fileDuration = metadata.format.duration;
     })
 
     ffmpeg(req.body.filePath)
         .on('filenames', function (filenames) {
-            // console.log('Will generate ' + filenames.join(', '))
             thumbsFilePath = "uploads/thumbnails/" + filenames[0];
         })
         .on('end', function () {
@@ -118,4 +117,4 @@ router.post("/getVideo", (req, res) => {
     })
 });
 
-export default router;
+module.exports = router;

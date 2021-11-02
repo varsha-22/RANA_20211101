@@ -1,4 +1,4 @@
-import { User } from '../models/User';
+const { User } = require('../models/User');
 
 
 let authentication = (req, res, next) => {
@@ -18,4 +18,4 @@ let authentication = (req, res, next) => {
   });
 };
 
-export default { authentication }
+module.exports = { authentication };

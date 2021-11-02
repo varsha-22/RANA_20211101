@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const saltRounds = 10;
 
@@ -86,4 +86,4 @@ userSchema.statics.findByToken = function (token, cb) {
 
 const User = mongoose.model('User', userSchema);
 
-export default { User }
+module.exports = { User }
